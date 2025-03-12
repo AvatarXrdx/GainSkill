@@ -16,11 +16,13 @@
             background: linear-gradient(to bottom, #1a3c34, #006600); /* Less bright green at bottom */
             color: white;
             text-align: center;
-            animation: siteOpen 1.5s ease-out forwards; /* New opening animation */
+            animation: siteOpen 1.5s ease-out forwards; /* Opening animation */
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Standard */
+            overflow-y: auto; /* Ensure smooth scrolling */
+            transition: background-color 0.1s; /* For flash effect */
         }
 
         @keyframes siteOpen {
@@ -38,6 +40,14 @@
             }
         }
 
+        @keyframes vibrate {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-6px); } /* Increased to ±6px */
+            50% { transform: translateY(6px); }
+            75% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
         .container {
             max-width: 600px;
             padding: 20px;
@@ -46,7 +56,6 @@
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); /* Subtle glow */
             backdrop-filter: blur(5px); /* Aesthetic blur effect */
-            animation: none; /* Container won't animate separately */
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
@@ -172,6 +181,10 @@
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Standard */
+            outline: none !important; /* Force remove outline */
+            outline-color: transparent !important; /* Set outline color to transparent */
+            outline-width: 0 !important; /* Set outline width to 0 */
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
 
         .get-button:hover {
@@ -179,6 +192,24 @@
             background-color: #333;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.7); /* Enhanced shadow on hover */
             text-shadow: 0 0 15px rgba(255, 255, 255, 1); /* Enhanced glow on hover */
+        }
+
+        .get-button:focus,
+        .get-button:active {
+            outline: none !important; /* Force remove outline on focus/active */
+            outline-color: transparent !important; /* Ensure outline color is transparent */
+            outline-width: 0 !important; /* Ensure outline width is 0 */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); /* Alternative focus style for accessibility */
+        }
+
+        .get-button.vibrate {
+            animation: vibrate 0.7s ease-in-out; /* Increased to 0.7s */
+            background-color: #222; /* Subtle flash effect */
+        }
+
+        .vibrate {
+            animation: vibrate 0.7s ease-in-out; /* Apply to body for scroll vibration */
+            background-color: #1a3c34; /* Subtle flash effect on body */
         }
 
         .availability {
@@ -257,6 +288,11 @@
         .terms-container a:hover {
             color: #333333; /* Darker black on hover */
             text-decoration: underline;
+        }
+
+        .terms-container a:focus {
+            outline: none; /* Remove default blue outline for email link */
+            color: #555555; /* Subtle color change for accessibility */
         }
 
         .footer {
@@ -343,7 +379,7 @@
         </div>
 
         <p class="price">Price: 20₹</p>
-        <a href="#" class="get-button" id="getButton">GET</a>
+        <a href="https://rzp.io/rzp/GfilShTa" class="get-button" id="getButton">GET</a>
         <p class="availability">ONLY FEW LEFT</p>
         <p class="lifetime">LIFETIME ACCESSIBLE</p>
 
@@ -360,13 +396,67 @@
     </div>
 
     <script>
-        document.getElementById('getButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            const redirectUrl = 'https://rzp.io/rzp/GfilShTa';
-            if (confirm('This is a premium course. No refunds will be issued. Proceed to payment?')) {
-                window.location.href = redirectUrl;
-            }
+        // Get DOM elements
+        const body = document.body;
+        const getButton = document.getElementById('getButton');
+
+        // Vibration effect duration (in milliseconds)
+        const vibrationDuration = 700; // Increased to 0.7s
+
+        // Debounce function to prevent rapid triggers
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Add vibration effect to GET button on click
+        getButton.addEventListener('click', function(event) {
+            console.log('GET button clicked, triggering vibration');
+            getButton.classList.add('vibrate');
+            setTimeout(() => {
+                getButton.classList.remove('vibrate');
+                console.log('Vibration removed from GET button');
+            }, vibrationDuration);
         });
+
+        // Detect scroll to top or bottom and trigger vibration with debounce
+        const handleScroll = debounce(function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+
+            // Check if scrolled to the top
+            if (scrollTop === 0) {
+                console.log('Scrolled to top, triggering vibration');
+                body.classList.add('vibrate');
+                setTimeout(() => {
+                    body.classList.remove('vibrate');
+                    console.log('Vibration removed from body (top)');
+                }, vibrationDuration);
+            }
+
+            // Check if scrolled to the bottom
+            if (scrollTop + clientHeight >= scrollHeight) {
+                console.log('Scrolled to bottom, triggering vibration');
+                body.classList.add('vibrate');
+                setTimeout(() => {
+                    body.classList.remove('vibrate');
+                    console.log('Vibration removed from body (bottom)');
+                }, vibrationDuration);
+            }
+        }, 100); // 100ms debounce
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Ensure page has enough scrollable content
+        body.style.height = '200vh'; // Temporarily increase height for testing scroll
     </script>
 </body>
 </html>
