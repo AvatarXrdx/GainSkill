@@ -21,8 +21,6 @@
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Standard */
-            overflow-y: auto; /* Ensure smooth scrolling */
-            transition: background-color 0.1s; /* For flash effect */
         }
 
         @keyframes siteOpen {
@@ -38,14 +36,6 @@
                 transform: scale(1); /* Return to normal size */
                 opacity: 1;
             }
-        }
-
-        @keyframes vibrate {
-            0% { transform: translateY(0); }
-            25% { transform: translateY(-6px); } /* Increased to ±6px */
-            50% { transform: translateY(6px); }
-            75% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
         }
 
         .container {
@@ -200,16 +190,6 @@
             outline-color: transparent !important; /* Ensure outline color is transparent */
             outline-width: 0 !important; /* Ensure outline width is 0 */
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); /* Alternative focus style for accessibility */
-        }
-
-        .get-button.vibrate {
-            animation: vibrate 0.7s ease-in-out; /* Increased to 0.7s */
-            background-color: #222; /* Subtle flash effect */
-        }
-
-        .vibrate {
-            animation: vibrate 0.7s ease-in-out; /* Apply to body for scroll vibration */
-            background-color: #1a3c34; /* Subtle flash effect on body */
         }
 
         .availability {
@@ -396,67 +376,7 @@
     </div>
 
     <script>
-        // Get DOM elements
-        const body = document.body;
-        const getButton = document.getElementById('getButton');
-
-        // Vibration effect duration (in milliseconds)
-        const vibrationDuration = 700; // Increased to 0.7s
-
-        // Debounce function to prevent rapid triggers
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Add vibration effect to GET button on click
-        getButton.addEventListener('click', function(event) {
-            console.log('GET button clicked, triggering vibration');
-            getButton.classList.add('vibrate');
-            setTimeout(() => {
-                getButton.classList.remove('vibrate');
-                console.log('Vibration removed from GET button');
-            }, vibrationDuration);
-        });
-
-        // Detect scroll to top or bottom and trigger vibration with debounce
-        const handleScroll = debounce(function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = document.documentElement.clientHeight;
-
-            // Check if scrolled to the top
-            if (scrollTop === 0) {
-                console.log('Scrolled to top, triggering vibration');
-                body.classList.add('vibrate');
-                setTimeout(() => {
-                    body.classList.remove('vibrate');
-                    console.log('Vibration removed from body (top)');
-                }, vibrationDuration);
-            }
-
-            // Check if scrolled to the bottom
-            if (scrollTop + clientHeight >= scrollHeight) {
-                console.log('Scrolled to bottom, triggering vibration');
-                body.classList.add('vibrate');
-                setTimeout(() => {
-                    body.classList.remove('vibrate');
-                    console.log('Vibration removed from body (bottom)');
-                }, vibrationDuration);
-            }
-        }, 100); // 100ms debounce
-
-        window.addEventListener('scroll', handleScroll);
-
-        // Ensure page has enough scrollable content
-        body.style.height = '200vh'; // Temporarily increase height for testing scroll
+        // No JavaScript needed for the "GET" button since we're using a direct href link
     </script>
 </body>
 </html>
