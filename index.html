@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillup - Money Making Courses</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif; /* Default font for body */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #1a3c34, #006600); /* Less bright green at bottom */
+            color: white;
+            text-align: center;
+            animation: siteOpen 1.5s ease-out forwards; /* New opening animation */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        @keyframes siteOpen {
+            0% {
+                transform: scale(0.8); /* Start slightly zoomed out */
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1); /* Zoom in slightly */
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1); /* Return to normal size */
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05); /* Aesthetic background */
+            border: 2px solid rgba(255, 255, 255, 0.3); /* Visible outline */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); /* Subtle glow */
+            backdrop-filter: blur(5px); /* Aesthetic blur effect */
+            animation: none; /* Container won't animate separately */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif; /* Unique font for heading */
+            font-size: 3rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            transition: transform 0.3s, text-shadow 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
+
+        .subtitle {
+            font-family: 'Lora', serif; /* Different font for 1000+ courses line */
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .subtitle:hover {
+            color: #d3d3d3;
+        }
+
+        .price {
+            font-family: 'Poppins', sans-serif; /* Unique font for price */
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .course-list {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .course-list:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-list h2 {
+            font-family: 'Lora', serif; /* Unique font for course list heading */
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background-color 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        th:hover, td:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .get-button {
+            display: inline-block;
+            background-color: black;
+            color: white;
+            padding: 15px 50px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif; /* Unique font for button */
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Glowing effect */
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Shadow effect */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .get-button:hover {
+            transform: scale(1.1);
+            background-color: #333;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7); /* Enhanced shadow on hover */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1); /* Enhanced glow on hover */
+        }
+
+        .availability {
+            font-family: 'Open Sans', sans-serif; /* Same as body for consistency */
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            margin: 10px 0;
+            transition: text-shadow 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .availability:hover {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
+
+        .lifetime {
+            font-family: 'Roboto', sans-serif; /* Same as subtitle for consistency */
+            font-size: 1rem;
+            margin: 5px 0;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .terms-container {
+            background: rgba(255, 255, 255, 0.1); /* Matching course list background */
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: transform 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .terms-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .terms-container h3 {
+            font-family: 'Lora', serif; /* Matching course list heading font */
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .terms-container p {
+            font-family: 'Lora', serif; /* Matching course list font */
+            font-size: 0.9rem;
+            color: #000000; /* Black text for Terms and Conditions */
+            margin: 5px 0;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .terms-container a {
+            color: #000000; /* Black text for email link */
+            text-decoration: none;
+            transition: color 0.3s;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        .terms-container a:hover {
+            color: #333333; /* Darker black on hover */
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-family: 'Lora', serif; /* Unique font for footer */
+            font-size: 0.9rem;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .price {
+                font-size: 1.2rem;
+            }
+
+            .get-button {
+                padding: 10px 30px;
+                font-size: 1.2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            .terms-container p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 601px) {
+            .container {
+                padding: 30px;
+            }
+
+            .get-button {
+                padding: 15px 50px;
+            }
+        }
+
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Lora&family=Montserrat&family=Open+Sans&family=Poppins&family=Roboto&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALL MONEY MAKING COURSES</h1>
+        <p class="subtitle">1000+ MONEY MAKING COURSES, 106GB+ LIFETIME ACCESS</p>
+        
+        <div class="course-list">
+            <h2>Money Making Courses</h2>
+            <table>
+                <tr><th>Name</th><th>Size</th></tr>
+                <tr><td>Dropshipping</td><td>24.15 GB</td></tr>
+                <tr><td>Facebook Ads</td><td>11.14 GB</td></tr>
+                <tr><td>Social Media Marketing [SMM]</td><td>20.88 GB</td></tr>
+                <tr><td>Affiliate Marketing</td><td>60.74 GB</td></tr>
+                <tr><td>Amazon FBA</td><td>70.15 GB</td></tr>
+                <tr><td>Copywriting Skills</td><td>13.57 GB</td></tr>
+                <tr><td>Crowdfunding</td><td>13.97 GB</td></tr>
+                <tr><td>Cryptocurrency Courses</td><td>59.87 GB</td></tr>
+                <tr><td>eBay eCommerce</td><td>15.44 GB</td></tr>
+                <tr><td>Email Marketing</td><td>26.51 GB</td></tr>
+                <tr><td>Forex & Trading</td><td>30.97 GB</td></tr>
+                <tr><td>Funnel Building</td><td>29.83 GB</td></tr>
+                <tr><td>Google Ads & Google Shopping</td><td>41.30 GB</td></tr>
+                <tr><td>Instagram Marketing</td><td>21.49 GB</td></tr>
+                <tr><td>Investment & Credit</td><td>19.72 GB</td></tr>
+                <tr><td>Messenger Bot Building</td><td>54.19 GB</td></tr>
+                <tr><td>Personal Branding & Course</td><td>35.01 GB</td></tr>
+                <tr><td>Print on Demand</td><td>25.41 GB</td></tr>
+                <tr><td>SEO (Search Engine Optimization)</td><td>47.45 GB</td></tr>
+            </table>
+        </div>
+
+        <p class="price">Price: 20₹</p>
+        <a href="#" class="get-button" id="getButton">GET</a>
+        <p class="availability">ONLY FEW LEFT</p>
+        <p class="lifetime">LIFETIME ACCESSIBLE</p>
+
+        <div class="terms-container">
+            <h3>Terms and Conditions</h3>
+            <p>This is a premium course. No refunds will be issued.</p>
+            <p>For inquiries, contact us at <a href="mailto:skillup24x7@gmail.com">skillup24x7@gmail.com</a>.</p>
+            <p>Course materials are for personal use only and may not be redistributed or reproduced without prior written consent from Skillup.</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Skillup</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('getButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            const redirectUrl = 'https://rzp.io/rzp/GfilShTa';
+            if (confirm('This is a premium course. No refunds will be issued. Proceed to payment?')) {
+                window.location.href = redirectUrl;
+            }
+        });
+    </script>
+</body>
+</html>
